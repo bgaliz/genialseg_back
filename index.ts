@@ -21,6 +21,6 @@ app.put('/api/editar-cliente', authMiddleware, updateClientController);
 app.get('/api/listar-clientes', authMiddleware, listClientController);
 
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(5000, () => {
+  console.log('Server is running on port 5000');
 });
