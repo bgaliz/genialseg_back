@@ -1,22 +1,24 @@
 require('dotenv').config();
 import express from 'express'
 import cors from 'cors';
+
 import { loginController } from './src/controller/login-controller';
 import { insertClientController, updateClientController, listClientController } from './src/controller/cliente-controller';
+import { authMiddleware } from './src/middleware/middleware';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 
-app.post('/', (req, res) => {
+app.all('/', (req, res) => {
   res.send('Hello World!');
 });
 
 app.post('/api/login', loginController);
-app.post('/api/cadastrar-cliente', insertClientController);
-app.put('/api/editar-cliente', updateClientController);
-app.get('/api/listar-clientes', listClientController);
+app.post('/api/cadastrar-cliente', authMiddleware, insertClientController);
+app.put('/api/editar-cliente', authMiddleware, updateClientController);
+app.get('/api/listar-clientes', authMiddleware, listClientController);
 
 
 app.listen(3000, () => {

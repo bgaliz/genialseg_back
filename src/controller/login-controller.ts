@@ -19,7 +19,7 @@ export const loginController = async (req: any, res: any) => {
         return res.status(500).json({ message: 'JWT secret is not defined' });
     }
 
-    const token = await jwt.sign({ username, password }, JWT_SECRET, {
+    const token = jwt.sign({ username, password }, JWT_SECRET, {
         expiresIn: "1h"
     });
 

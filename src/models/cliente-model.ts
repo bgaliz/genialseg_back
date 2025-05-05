@@ -17,6 +17,10 @@ class ClienteModel {
     }
 
     update(id: number, updatedData: Partial<Omit<ClienteType, "id">>): ClienteType | null {
+        const existingClient = clientes.find((c) => c.email === updatedData.email);
+        if (existingClient) {
+            throw new Error("E-mail já cadastrado!");
+        }
         const clienteIndex = clientes.findIndex((cliente) => String(cliente.id) === String(id));
         if (clienteIndex === -1) {
             throw new Error("Cliente não encontrado");
