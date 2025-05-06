@@ -16,7 +16,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
             return;
         }
         
-        req.body = decoded; // Adiciona o usuário decodificado ao objeto da requisição
+        req.body.role = decoded; // Adiciona o usuário decodificado ao objeto da requisição
         next(); // Continua para a próxima função
     } catch (error) {
         console.error("Erro ao verificar o token:", (error as Error).message);

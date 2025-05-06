@@ -12,8 +12,7 @@ function verifyMissingFields({ name, email, phone, address }: ClienteType): stri
 
 export const insertClientController = async (req: any, res: any) => {
     const payload: ClienteType = req.body;
-
-   const fields = verifyMissingFields(payload);
+    const fields = verifyMissingFields(payload);
 
     if (fields.length > 0) {
         return res.status(400).json({
