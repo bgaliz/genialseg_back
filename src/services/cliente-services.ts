@@ -1,8 +1,21 @@
 import ClienteModel from "../models/cliente-model";
 import { ClienteType } from "../types/cliente-types";
 
-
 class ClienteService {
+    login = async (username: string, password: string) => {
+        try {
+            const user = await ClienteModel.getRegisteredUser(username, password)
+            return user
+        }catch (error) {
+            if(error instanceof Error) {
+                return {
+                    message: "Falha ao executar login", 
+                    error: error?.message
+                }
+            }
+        }
+    }
+
     insertClient(cliente: Omit<ClienteType, "id">) {
         try{
             const newClient: ClienteType = ClienteModel.insert(cliente);

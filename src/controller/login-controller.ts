@@ -1,12 +1,12 @@
-import LoginService from "../services/login-services";
 import jwt from 'jsonwebtoken';
+import clienteServices from '../services/cliente-services';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const loginController = async (req: any, res: any) => {
     const { username, password } = req.body;
 
-    const user = await LoginService.login(username, password);
+    const user = await clienteServices.login(username, password);
 
     if (user && 'message' in user) {
         return res.status(401).json({
@@ -20,7 +20,7 @@ export const loginController = async (req: any, res: any) => {
     }
 
     const token = jwt.sign({ username, password }, JWT_SECRET, {
-        expiresIn: "1h"
+        expiresIn: "10m"
     });
 
     return res.status(200).json({ message: 'Login efetuado com sucesso!', token });
