@@ -86,7 +86,8 @@ export const updateClientController = async (req: any, res: any) => {
 
 export const listClientController = async (req: any, res: any) => {
     try {
-        const clients = ClientServices.listClient();
+        const clients = await ClientServices.listClient();
+        console.log(clients)
         res.status(200).json(clients);
     } catch (error) {
         if (error instanceof Error) {

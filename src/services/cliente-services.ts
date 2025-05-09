@@ -16,9 +16,9 @@ class ClienteService {
         }
     }
 
-    insertClient(cliente: Omit<ClienteType, "id">) {
+    async insertClient(cliente: Omit<ClienteType, "id">) {
         try{
-            const newClient: ClienteType = ClienteModel.insert(cliente);
+            const newClient: ClienteType = await ClienteModel.insert(cliente);
             return newClient;
         }catch (error) {
             if(error instanceof Error) {
@@ -27,9 +27,9 @@ class ClienteService {
         }
     }
 
-    updateClient(id: number, updatedData: Partial<Omit<ClienteType, "id">>) {
+    async updateClient(id: number, updatedData: Partial<Omit<ClienteType, "id">>) {
         try{
-            const editedClient = ClienteModel.update(id, updatedData);
+            const editedClient = await ClienteModel.update(id, updatedData);
             return editedClient;
         }catch(error) {
             if(error instanceof Error) {
@@ -38,8 +38,9 @@ class ClienteService {
         }   
     }
 
-    listClient(): ClienteType[] {
-        return ClienteModel.list();
+    async listClient() {
+        const clientsList = await ClienteModel.list();
+        return clientsList;
     }
 }
 

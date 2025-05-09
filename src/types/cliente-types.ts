@@ -1,8 +1,8 @@
 type Address = {
     street: string;
-    city: string;
-    state: string;
-    zip: string;
+    number: string;
+    neighborhood: string;
+    zipcode: string;
 };
 
 export type ClienteType = {
